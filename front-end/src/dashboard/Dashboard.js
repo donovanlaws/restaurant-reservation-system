@@ -79,7 +79,7 @@ function Dashboard({ date }) {
           <th scope="row">{table.table_id}</th>
           <td>{table.table_name}</td>
           <td>{table.capacity}</td>
-          <td>{table.status}</td>
+          <td data-table-id-status={table.table_id}>{table.status}</td>
           <td>{table.reservation_id}</td>
         </tr>
       )
