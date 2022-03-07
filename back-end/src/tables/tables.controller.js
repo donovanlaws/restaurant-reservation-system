@@ -21,6 +21,7 @@ async function create(req, res, next) {
 async function update(req, res, next) {
     const { table, reservation } = res.locals;
     table.reservation_id = reservation.reservation_id;
+    table.status = "occupied";
     reservation.status = "seated";
 
     const updatedTable = await service.update(table);
