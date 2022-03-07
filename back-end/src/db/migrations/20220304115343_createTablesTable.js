@@ -4,7 +4,7 @@ exports.up = function (knex) {
         table.increments("table_id").primary();
         table.string("table_name");
         table.integer("capacity");
-        table.string("status");
+        table.string("status").defaultTo("free");
         table.integer("reservation_id").references("reservation_id").inTable("reservations").onDelete("set null");
         table.timestamps(true, true);
     });
