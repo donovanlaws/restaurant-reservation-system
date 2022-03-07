@@ -68,13 +68,42 @@ export async function listReservations(params, signal) {
     .then(formatReservationTime);
 }
 
+export async function listTables(signal) {
+  const url = `${API_BASE_URL}/tables`;
+  const options = {method: "GET", headers, signal}
+  return await fetchJson(url, options, [])
+}
+
 /**
  * Creates a new reservation.
- * @param reservation 
- * @param signal 
+ * @param {object} reservation 
+ * @param {AbortController.signal} signal
  */
 export async function createReservation(reservation, signal) {
   const url = `${API_BASE_URL}/reservations`;
   const options = {method: "POST", headers, body: JSON.stringify({ data: reservation }), signal};
   return await fetchJson(url, options, {});
+}
+
+/**
+ * Creates a new table.
+ * @param {object} table
+ * @param {AbortController.signal} signal
+ */
+export async function createTable(table, signal) {
+  const url = `${API_BASE_URL}/tables`;
+  const options = {method: "POST", headers, body: JSON.stringify({ data: table }), signal};
+  return await fetchJson(url, options, {})
+}
+
+/**
+ * Updates an existing table
+ * @param {string} table_id
+ * @param {string} reservation_id
+ * @param {AbortController.signal} signal
+ */
+export async function updateTable(table_id, reservation_id, signal) {
+  const url = `${API_BASE_URL}/tables/${table_id}/seat`;
+  const options = {method: "PUT", headers, body: JSON.stringify({ data: { reservation_id }}), signal}
+  return await fetchJson(url, options, {})
 }

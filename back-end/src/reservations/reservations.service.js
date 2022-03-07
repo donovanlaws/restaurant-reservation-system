@@ -14,7 +14,28 @@ function list(date) {
         .orderBy("reservation_time")
 }
 
+function read(reservation_id) {
+    return knex("reservations")
+        .where({ reservation_id })
+        .first();
+}
+
+function update(reservation) {
+    return knex("reservations")
+        .where({ reservation_id: reservation.reservation_id })
+        .update(reservation, "*")
+}
+
+function updateStatus(reservation) {
+    return knex("reservations")
+        .where({ reservation_id: reservation.reservation_id })
+        .update(reservation);
+}
+
 module.exports = {
     create,
-    list
+    list,
+    read,
+    update,
+    updateStatus
 }

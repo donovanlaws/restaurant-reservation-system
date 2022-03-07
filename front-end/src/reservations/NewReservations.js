@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ErrorAlert from "../layout/ErrorAlert";
 import ReservationForm from "./ReservationForm";
-import { today, formatAsDate, formatAsTime } from "../utils/date-time";
+import { today } from "../utils/date-time";
 import { createReservation } from "../utils/api";
 import { useHistory } from "react-router-dom";
 /**
@@ -18,7 +18,8 @@ function NewReservation() {
         mobile_number: "",
         reservation_date: today(),
         reservation_time: "10:30",
-        people: 1
+        people: 0,
+        status: "booked"
     }
     const [formData, setFormData] = useState(initialFormState);
     const [error, SetError] = useState([]);
@@ -68,7 +69,7 @@ function NewReservation() {
     return (
         <main>
             <h1>New Reservation</h1>
-            <ReservationForm formData={formData} handleSubmit={handleSubmit} handleChange={handleChange} error={error}/>
+            <ReservationForm formData={formData} handleSubmit={handleSubmit} handleChange={handleChange} />
             <ErrorAlert error={error} />
         </main>
     );
