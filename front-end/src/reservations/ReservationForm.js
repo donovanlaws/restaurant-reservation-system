@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-export default function ReservationForm({ formData, handleSubmit, handleChange, error }) {
+export default function ReservationForm({ formData, handleSubmit, handleChange }) {
     let history = useHistory();
     return (
         <form onSubmit={handleSubmit}>
@@ -26,5 +26,3 @@ export default function ReservationForm({ formData, handleSubmit, handleChange, 
         </form>
     )
 }
-
-//{ error ? <button type="submit" className="btn btn-primary mr-2" disabled>Submit</button> : <button type="submit" className="btn btn-primary mr-2">Submit</button>}
