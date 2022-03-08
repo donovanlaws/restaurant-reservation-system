@@ -25,12 +25,6 @@ function NewReservation() {
     const [error, SetError] = useState([]);
     const history = useHistory();
 
-    // Since the reservation date defaults to "today", if today is a Tuesday, show an error accordingly.
-    useEffect(() => {
-        const reservation = new Date(`${formData.reservation_date}`);
-        if (reservation.getUTCDay() === 2) SetError(["The restaurant is closed on Tuesdays!"])
-    }, [])
-
     // Every time information is changed, update and check for errors or inconsistencies.
     const handleChange = (event) => {
         if (event.target.name === "people") setFormData({ ...formData, [event.target.name]: Number(event.target.value)})
@@ -45,9 +39,8 @@ function NewReservation() {
         // Handle Validation of Date
         const reservation = new Date(`${formData.reservation_date}T${formData.reservation_time}Z`);
         const now = new Date();
-        if (reservation.getUTCDay() === 2 && reservation < now) errors.push("The restaurant is closed on Tuesdays!", "Your reservation cannot be in the past!");
-        else if (reservation.getUTCDay() === 2) errors.push("The restaurant is closed on Tuesdays!");
-        else if (reservation < now) errors.push("Your reservation cannot be in the past!");
+        if (reservation.getUTCDay() === 2) errors.push("The restaurant is closed on Tuesdays!");
+        if (reservation < now) errors.push("Your reservation cannot be in the past!");
 
         // Handle Validation of Time
         const splitTime = formData.reservation_time.split(":");
