@@ -21,24 +21,20 @@ function NewTable() {
     const history = useHistory();
 
     // Every time information is changed, update and check for errors or inconsistencies.
+    // Note: Number input fields such as capacity get converted to strings, force the form to be using a number.
     const handleChange = (event) => {
-        if (event.target.name === "capacity") setFormData({ ...formData, [event.target.name]: Number(event.target.value)})
-        else setFormData({ ...formData, [event.target.name]: event.target.value})
+        setFormData({ ...formData, [event.target.name]: event.target.name === "capacity" ? Number(event.target.value) : event.target.value})
     }
 
     // Once submitted, create the reservation and return to the dashboard on that reservation's date. Otherwise show an error.
     async function handleSubmit(event) {
         event.preventDefault();
-        const errors = [];
-        if (!errors.length) {
-            try {
-                await createTable(formData);
-                history.push('/dashboard');
-            } catch (err) {
-                errors.push(err.message);
-                SetError(errors);
-            }
-        } else SetError(errors);
+        try {
+            await createTable(formData);
+            history.push('/dashboard');
+        } catch (err) {
+            SetError([err.message]);
+        }
     }
 
     return (

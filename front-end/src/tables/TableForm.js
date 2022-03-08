@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-export default function TableForm({ formData, handleSubmit, handleChange, error }) {
+export default function TableForm({ formData, handleSubmit, handleChange }) {
     let history = useHistory();
     return (
         <form onSubmit={handleSubmit}>
