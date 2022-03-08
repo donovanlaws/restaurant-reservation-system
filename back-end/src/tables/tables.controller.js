@@ -14,6 +14,13 @@ async function list(req, res, next) {
 }
 
 async function create(req, res, next) {
+    const { reservation_id } = req.body.data;
+    if (reservation_id) {
+        const reservation = await reservationService.read(reservation_id);
+        reservation.status = "seated";
+        req.body.data.status = "occupied";
+        const updatedRes = await reservationService.update(reservation, req.body.data);
+    }
     const data = await service.create(req.body.data);
     res.status(201).json({ data });
 }
@@ -23,6 +30,18 @@ async function update(req, res, next) {
     table.reservation_id = reservation.reservation_id;
     table.status = "occupied";
     reservation.status = "seated";
+
+    const updatedTable = await service.update(table);
+    const updatedRes = await reservationService.update(reservation, table);
+    res.json({ data: [updatedTable, updatedRes] });
+}
+
+async function finishTable(req, res, next) {
+    const { table } = res.locals;
+    const reservation = await reservationService.read(table.reservation_id);
+    table.reservation_id = null;
+    table.status = "free";
+    reservation.status = "finished";
 
     const updatedTable = await service.update(table);
     const updatedRes = await reservationService.update(reservation, table);
@@ -72,6 +91,11 @@ async function tableOccupied(req, res, next) {
     else next({ status: 400, message: `Table is already occupied!` })
 }
 
+async function tableNotOccupied(req, res, next) {
+    if (res.locals.table.reservation_id) next();
+    else next({ status: 400, message: `Table is not occupied!`})
+}
+
 async function tableFitsCapacity(req, res, next) {
     const tableLimit = res.locals.table.capacity;
     const people = res.locals.reservation.people;
@@ -102,5 +126,10 @@ module.exports = {
         asyncErrorBoundary(tableOccupied),
         asyncErrorBoundary(tableFitsCapacity),
         asyncErrorBoundary(update)
+    ],
+    delete: [
+        asyncErrorBoundary(tableExists),
+        asyncErrorBoundary(tableNotOccupied),
+        asyncErrorBoundary(finishTable)
     ]
 };
