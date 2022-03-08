@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { listReservations, listTables } from "../utils/api";
+import { listReservations, listTables, finishTable } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
@@ -51,6 +51,16 @@ function Dashboard({ date }) {
     return () => abortController.abort();
   }, [date]);
 
+  async function finishThisTable(table_id) {
+    const approved = window.confirm('Is this table ready to seat new guests? This cannot be undone.')
+    if (approved) {
+      finishTable(table_id)
+        .then(() => listTables())
+        .then((response) => setTables(response))
+        .catch((err) => console.log(err))
+    }
+  }
+
   // Map out the reservations into a table list with information
   let reservationsList = [];
   if (reservations.length > 0) {
@@ -81,6 +91,13 @@ function Dashboard({ date }) {
           <td>{table.capacity}</td>
           <td data-table-id-status={table.table_id}>{table.status}</td>
           <td>{table.reservation_id}</td>
+          {table.status === "occupied" && 
+            <td>
+              <button className="btn btn-primary" data-table-id-finish={table.table_id} onClick={(event) => {
+                event.preventDefault();
+                finishThisTable(table.table_id);
+              }}>Finish</button>
+            </td>}
         </tr>
       )
     })
@@ -106,6 +123,7 @@ function Dashboard({ date }) {
             <th scope="col">Capacity</th>
             <th scope="col">Status</th>
             <th scope="col">Reservation ID</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -123,7 +141,7 @@ function Dashboard({ date }) {
             <th scope="col">People</th>
             <th scope="col">Time</th>
             <th scope="col">Status</th>
-            <th scope="col"></th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
