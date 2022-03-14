@@ -11,7 +11,7 @@ import "./Layout.css";
  *
  * @returns {JSX.Element}
  */
-function Layout() {
+export default function Layout() {
   return (
     <div className="container-fluid">
       <div className="row h-100">
@@ -25,5 +25,3 @@ function Layout() {
     </div>
   );
 }
-
-export default Layout;

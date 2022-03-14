@@ -17,7 +17,7 @@ import EditReservation from "../reservations/EditReservation";
  *
  * @returns {JSX.Element}
  */
-function Routes() {
+export default function Routes() {
   return (
     <Switch>
       <Route exact={true} path="/">
@@ -27,16 +27,16 @@ function Routes() {
         <Redirect to={"/dashboard"} />
       </Route>
       <Route exact={true} path="/reservations/new">
-        <NewReservation/>
+        <NewReservation />
       </Route>
       <Route exact={true} path="/reservations/:reservation_id/seat">
-        <ReservationSeat/>
+        <ReservationSeat />
       </Route>
       <Route exact={true} path="/reservations/:reservation_id/edit">
         <EditReservation />
       </Route>
       <Route exact={true} path="/tables/new">
-        <NewTable/>
+        <NewTable />
       </Route>
       <Route path="/search">
         <SearchDash />
@@ -50,5 +50,3 @@ function Routes() {
     </Switch>
   );
 }
-
-export default Routes;
