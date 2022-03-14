@@ -21,8 +21,10 @@ async function read(req, res, next) {
 
 // Update a reservation, based on if it exists and was stored.
 async function update(req, res, next) {
-  const data = await service.update(res.locals.reservation);
-  res.status(200).json({ data })
+  const { reservation_id } = res.locals.reservation;
+  const updatedRes = { ...req.body.data, reservation_id };
+  const data = await service.update(updatedRes);
+  res.json({ data: data[0] })
 }
 
 // Update a reservation's status, based on if it exists and the status property passed checks.
@@ -123,6 +125,14 @@ module.exports = {
     asyncErrorBoundary(read)
   ],
   update: [
+    hasProperty("first_name"),
+    hasProperty("last_name"),
+    hasProperty("mobile_number"),
+    hasProperty("reservation_date"),
+    hasProperty("reservation_time"),
+    hasProperty("people"),
+    dateTimeValid,
+    validPeople,
     asyncErrorBoundary(resExists),
     asyncErrorBoundary(update)
   ],
