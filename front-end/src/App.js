@@ -6,7 +6,7 @@ import Layout from "./layout/Layout";
  * Defines the root application component.
  * @returns {JSX.Element}
  */
-function App() {
+export default function App() {
   return (
     <Switch>
       <Route path="/">
@@ -15,5 +15,3 @@ function App() {
     </Switch>
   );
 }
-
-export default App;
