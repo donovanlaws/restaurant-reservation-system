@@ -48,13 +48,15 @@ async function resExists(req, res, next) {
 
 // If the query includes a date, list reservations for that date or list nothing.
 async function queryInput(req, res, next) {
-  const { date } = req.query;
+  const { date, mobile_number } = req.query;
   if (date) {
-    const reservations = await service.list(date);
-    if (reservations.length) res.locals.reservations = reservations;
-    else res.locals.reservations = [];
+    res.locals.reservations = await service.list(date);
     next();
-  } else next({status: 400, message:`No date query was specified.`})
+  } else if (mobile_number) {
+    res.locals.reservations = await service.search(mobile_number);
+    next();
+  }
+  else next({status: 400, message:`No query was specified in the URL`})
 }
 
 // Checks that the reservation's date and time are not an invalid date or time.
