@@ -81,12 +81,31 @@ export async function searchReservations(number, signal) {
   return await fetchJson(url, options, {});
 }
 
+export async function readReservation(reservation_id, signal) {
+  const url = `${API_BASE_URL}/reservations/${reservation_id}`;
+  const options = {method: "GET", headers, signal};
+  return await fetchJson(url, options, {});
+}
+
+export async function updateReservation(updatedRes, signal) {
+  const url = `${API_BASE_URL}/reservations/${updatedRes.reservation_id}`;
+  const options = {method: 'PUT', headers, body: JSON.stringify({ data: updatedRes }), signal};
+  return await fetchJson(url, options, {});
+}
+
+
+export async function updateReservationStatus(status, reservation_id, signal) {
+  const url = `${API_BASE_URL}/reservations/${reservation_id}/status`;
+  const options = {method: "PUT", headers, body: JSON.stringify({ data: { status }}), signal};
+  return await fetchJson(url, options, {})
+}
+
 
 // List all tables from the API
 export async function listTables(signal) {
   const url = `${API_BASE_URL}/tables`;
   const options = {method: "GET", headers, signal};
-  return await fetchJson(url, options, []);
+  return await fetchJson(url, options, {});
 }
 
 // Create a new table to the API
