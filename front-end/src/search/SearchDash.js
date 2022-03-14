@@ -42,7 +42,7 @@ export default function SearchDash() {
         <form onSubmit={handleSubmit}>
             <label htmlFor="mobile_number">Mobile Number</label>
             <div className="form-group d-md-flex mb-3">
-                <input required name="mobile_number" type="text" className="form-control col-2 mr-2" value={input} placeholder="Enter a reservation's phone number" onChange={handleChange} />
+                <input required name="mobile_number" type="text" className="form-control col-3 mr-2" value={input} placeholder="Enter a reservation's phone number" onChange={handleChange} />
                 <button type="submit" className="btn btn-primary">Find</button>
             </div>
             

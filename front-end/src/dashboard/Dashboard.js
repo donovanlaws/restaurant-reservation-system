@@ -75,7 +75,7 @@ function Dashboard({ date }) {
         <Link to={`/dashboard?date=${next(date)}`}><button className="btn btn-dark" type="button">Next Day&nbsp;<span className="oi oi-arrow-thick-right" /></button></Link>
       </div>
       <TableList tables={tables} finishThisTable={finishThisTable}/>
-      <ReservationList reservations={reservations} />
+      <ReservationList reservations={reservations} setReservations={setReservations} />
       <ErrorAlert error={dashboardError} />
     </main>
   );

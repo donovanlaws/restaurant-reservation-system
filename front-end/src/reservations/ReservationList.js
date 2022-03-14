@@ -1,7 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { updateReservationStatus } from "../utils/api";
+import { useHistory } from "react-router";
 
 export default function ReservationList({ reservations }) {
+    const history = useHistory();
+    async function handleDelete(reservation_id) {
+        const approved = window.confirm('Do you want to cancel this reservation? This cannot be undone.')
+        if (approved) {
+            const abortController = new AbortController();
+            updateReservationStatus("cancelled", reservation_id, abortController.signal)
+            .then(() => history.push("/"))
+        }
+    }
+
     // Map out the reservations into a table list with information
     let reservationsList = [];
     if (reservations.length > 0) {
@@ -15,7 +27,16 @@ export default function ReservationList({ reservations }) {
                     <td>{res.people}</td>
                     <td>{res.reservation_time}</td>
                     <td data-reservation-id-status={res.reservation_id}>{res.status}</td>
-                    <td>{res.status === "booked" && <Link className="btn btn-primary" to={`/reservations/${res.reservation_id}/seat`}>Seat</Link>}</td>
+                    <td>
+                        {res.status === "booked" && <>
+                            <Link className="btn btn-primary mr-2" to={`/reservations/${res.reservation_id}/seat`}>Seat</Link>
+                            <Link className="btn btn-primary mr-2" to={`/reservations/${res.reservation_id}/edit`}>Edit</Link>
+                            </>
+                        }
+                        {res.status !== "cancelled" && res.status !== "finished" &&
+                            <button className="btn btn-secondary" type="button" data-reservation-id-cancel={res.reservation_id} onClick={() => handleDelete(res.reservation_id)}>Cancel</button>
+                        }
+                    </td>
                 </tr>
             )
         })
@@ -26,13 +47,13 @@ export default function ReservationList({ reservations }) {
             <thead className="thead-dark">
                 <tr>
                     <th className="col-1">ID</th>
-                    <th className="col-2">First Name</th>
-                    <th className="col-2">Last Name</th>
+                    <th className="col-1">First Name</th>
+                    <th className="col-1">Last Name</th>
                     <th className="col-2">Number</th>
                     <th className="col-1">People</th>
                     <th className="col-1">Time</th>
                     <th className="col-1">Status</th>
-                    <th className="col-2">Actions</th>
+                    <th className="col-3">Actions</th>
                 </tr>
             </thead>
             <tbody>
