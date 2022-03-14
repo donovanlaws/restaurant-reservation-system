@@ -1,5 +1,5 @@
 exports.up = function (knex) {
-  // Connect to Knex and create a new table with the columns needed.
+  // Connect with knex and set up a table "Reservations"
   return knex.schema.createTable("reservations", (table) => {
     table.increments("reservation_id").primary();
     table.string("first_name");
