@@ -29,12 +29,12 @@ export default function ReservationList({ reservations }) {
           <td>
             {res.status === "booked" && (
               <>
-                <Link className="btn btn-primary mr-2" to={`/reservations/${res.reservation_id}/seat`}>Seat</Link>
-                <Link className="btn btn-primary mr-2" to={`/reservations/${res.reservation_id}/edit`}>Edit</Link>
+                <Link className="btn btn-success mx-1 py-1" to={`/reservations/${res.reservation_id}/seat`}>Seat</Link>
+                <Link className="btn btn-primary mx-1 py-1" to={`/reservations/${res.reservation_id}/edit`}>Edit</Link>
               </>
             )}
             {res.status !== "cancelled" && res.status !== "finished" && (
-              <button className="btn btn-secondary" type="button" data-reservation-id-cancel={res.reservation_id} onClick={() => handleDelete(res.reservation_id)}>Cancel</button>
+              <button className="btn btn-danger mx-1 py-1" type="button" data-reservation-id-cancel={res.reservation_id} onClick={() => handleDelete(res.reservation_id)}>Cancel</button>
             )}
           </td>
         </tr>
@@ -44,8 +44,8 @@ export default function ReservationList({ reservations }) {
 
   // JSX, Page Contents
   return (
-    <table className="table">
-      <thead className="thead-dark">
+    <table className="table table-striped">
+      <thead className="table-head">
         <tr>
           <th className="col-1">ID</th>
           <th className="col-1">First Name</th>

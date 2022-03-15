@@ -47,7 +47,7 @@ export default function EditReservation() {
   // JSX, Page Contents
   return (
     <main>
-      <h1>Edit Reservation</h1>
+      <h2>Edit Reservation: {reservation_id}</h2>
       <ReservationForm formData={formData} submitAction={submitAction} setFormData={setFormData} setError={setError} />
       <ErrorAlert error={error} />
     </main>

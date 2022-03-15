@@ -26,7 +26,7 @@ export default function NewReservation() {
   // JSX, Page Contents
   return (
     <main>
-      <h1>New Reservation</h1>
+      <h2>New Reservation</h2>
       <ReservationForm formData={formData} submitAction={submitAction} setFormData={setFormData} setError={setError} />
       <ErrorAlert error={error} />
     </main>

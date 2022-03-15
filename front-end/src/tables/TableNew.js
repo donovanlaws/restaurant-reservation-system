@@ -40,7 +40,7 @@ export default function NewTable() {
   // JSX, Page Contents
   return (
     <main>
-      <h1>New Table</h1>
+      <h2>New Table</h2>
       <TableForm formData={formData} handleSubmit={handleSubmit} handleChange={handleChange} />
       <ErrorAlert error={error} />
     </main>

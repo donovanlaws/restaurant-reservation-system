@@ -80,7 +80,7 @@ export default function Dashboard({ date }) {
           <button className="btn btn-dark" type="button"><span className="oi oi-arrow-thick-left" />&nbsp;Previous Day</button>
         </Link>
         <Link to={`/dashboard?date=${today()}`}>
-          <button className="btn btn-info mx-3" type="button">Today</button>
+          <button className="btn btn-info mx-3" type="button" disabled={date === today() ? true : false}>Today</button>
         </Link>
         <Link to={`/dashboard?date=${next(date)}`}>
           <button className="btn btn-dark" type="button">Next Day&nbsp;<span className="oi oi-arrow-thick-right" /></button>

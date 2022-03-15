@@ -37,8 +37,8 @@ export default function SearchDash() {
   };
 
   return (
-    <>
-      <h1>Search Reservations</h1>
+    <main>
+      <h2>Search Reservations</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="mobile_number">Mobile Number</label>
         <div className="form-group d-md-flex mb-3">
@@ -46,16 +46,16 @@ export default function SearchDash() {
             required
             name="mobile_number"
             type="text"
-            className="form-control col-3 mr-2"
+            className="form-control col-6 mr-2"
             value={input}
             placeholder="Enter a reservation's phone number"
             onChange={handleChange}
           />
-          <button type="submit" className="btn btn-primary">Find</button>
+          <button type="submit" className="btn btn-primary"><span class="oi oi-magnifying-glass"></span> Find</button>
         </div>
       </form>
       <ReservationList reservations={reservations} />
       <ErrorAlert error={error} />
-    </>
+    </main>
   );
 }
