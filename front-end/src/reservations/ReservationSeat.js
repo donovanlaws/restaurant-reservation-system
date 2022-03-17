@@ -44,7 +44,8 @@ export default function ReservationSeat() {
 
     if (!errors.length) {
       try {
-        await updateTable(selectedId, reservation_id);
+        const abortController = new AbortController();
+        await updateTable(selectedId, reservation_id, abortController.signal);
         history.push("/dashboard");
       } catch (err) {
         errors.push(err.message);

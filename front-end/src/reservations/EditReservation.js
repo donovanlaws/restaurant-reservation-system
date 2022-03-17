@@ -41,7 +41,8 @@ export default function EditReservation() {
 
   // Once submitted, update the reservation and return to the dashboard on that reservation's date. Otherwise show an error.
   async function submitAction() {
-    await updateReservation(formData);
+    const abortController = new AbortController();
+    await updateReservation(formData, abortController.signal);
   }
 
   // JSX, Page Contents

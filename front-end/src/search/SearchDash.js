@@ -51,7 +51,7 @@ export default function SearchDash() {
             placeholder="Enter a reservation's phone number"
             onChange={handleChange}
           />
-          <button type="submit" className="btn btn-primary"><span class="oi oi-magnifying-glass"></span> Find</button>
+          <button type="submit" className="btn btn-primary"><span className="oi oi-magnifying-glass"></span> Find</button>
         </div>
       </form>
       <ReservationList reservations={reservations} />

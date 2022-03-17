@@ -9,7 +9,7 @@
 }
 
 .side-bar, .table-head {
-  background-color: #2891a3;
+  background-color: #3398b1;
 }
 
 body {
@@ -23,7 +23,7 @@ main, tr {
 
 form {
   text-align: left;
-  background-color: rgb(50, 139, 161);
+  background-color: #3398b1;
   border-radius: 15px;
   padding: 15px;
   margin-bottom: 15px;
@@ -36,7 +36,7 @@ form {
 
 .table-striped>tbody>tr:nth-child(even)>td, 
 .table-striped>tbody>tr:nth-child(even)>th {
-  background-color: rgba(78, 75, 100, 0.95); 
+  background-color: rgba(57, 54, 80, 0.95); 
 }
 
 .alert-danger {
