@@ -27,8 +27,8 @@ export default function TableForm({ formData, handleSubmit, handleChange }) {
           onChange={handleChange}
         />
       </div>
-      <button type="submit" className="btn btn-primary mr-2">Submit</button>
-      <button className="btn btn-secondary" type="button" onClick={() => history.goBack()}>Cancel</button>
+      <button type="submit" className="btn btn-primary mr-2"><span className="oi oi-check"></span> Submit</button>
+      <button className="btn btn-secondary" type="button" onClick={() => history.goBack()}><span className="oi oi-x"></span> Cancel</button>
     </form>
   );
 }

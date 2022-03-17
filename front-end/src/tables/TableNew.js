@@ -30,7 +30,8 @@ export default function NewTable() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      await createTable(formData);
+      const abortController = new AbortController();
+      await createTable(formData, abortController.signal);
       history.push("/dashboard");
     } catch (err) {
       SetError([err.message]);
@@ -40,7 +41,7 @@ export default function NewTable() {
   // JSX, Page Contents
   return (
     <main>
-      <h1>New Table</h1>
+      <h2>New Table</h2>
       <TableForm formData={formData} handleSubmit={handleSubmit} handleChange={handleChange} />
       <ErrorAlert error={error} />
     </main>

@@ -44,7 +44,8 @@ export default function ReservationSeat() {
 
     if (!errors.length) {
       try {
-        await updateTable(selectedId, reservation_id);
+        const abortController = new AbortController();
+        await updateTable(selectedId, reservation_id, abortController.signal);
         history.push("/dashboard");
       } catch (err) {
         errors.push(err.message);
@@ -55,12 +56,13 @@ export default function ReservationSeat() {
 
   // JSX, Page Contents
   return (
-    <>
+    <main>
       <ErrorAlert error={seatError} />
+      <h2>Seating Reservation: {reservation_id}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="select_table" className="mt-2">
-            <h3>Choose a table to seat reservation {reservation_id}</h3>
+            Choose a table to seat reservation {reservation_id}
           </label>
           <select onChange={handleChange} className="form-control" id="select_table" name="table_id">
             <option key={0} value={0}>- Select A Table -</option>
@@ -74,6 +76,6 @@ export default function ReservationSeat() {
           <button onClick={() => history.goBack()} className="btn btn-secondary">Cancel</button>
         </div>
       </form>
-    </>
+    </main>
   );
 }

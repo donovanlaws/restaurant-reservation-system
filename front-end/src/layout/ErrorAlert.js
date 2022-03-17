@@ -12,9 +12,9 @@ export default function ErrorAlert({ error }) {
   if (!error || !Array.isArray(error) || !error.length) return null;
   // Otherwise, return each error in it's own error message box.
   else
-    return error.map((err, index) => {
+    return error.map((err) => {
       return (
-        <div key={index} className="alert alert-danger m-2">
+        <div key={err} className="alert alert-danger m-2">
           Error: {err}
         </div>
       );

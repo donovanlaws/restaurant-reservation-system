@@ -1,4 +1,83 @@
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 .side-bar {
-  background-color: #393a44;
   min-width: 200px;
+  max-width: 200px;
+  min-height: 100vh;
+}
+
+.side-bar, .table-head {
+  background-color: #3398b1;
+}
+
+body {
+  background-image: url("../_IMAGES/vecteezyBG.jpg");
+  background-size: 70%;
+}
+
+main, tr {
+  text-align: center;
+}
+
+form {
+  text-align: left;
+  background-color: #3398b1;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+  background-color: rgba(40, 36, 49, 0.95); 
+}
+
+.table-striped>tbody>tr:nth-child(even)>td, 
+.table-striped>tbody>tr:nth-child(even)>th {
+  background-color: rgba(57, 54, 80, 0.95); 
+}
+
+.alert-danger {
+  border-color: red;
+  border-radius: 15px;
+  border-width: 2px;
+  background-color: #ffa2a2;
+}
+
+h1, h2, h3, h4, ul, li, p, tr, td, label {
+  color: white;
+}
+
+
+
+
+@media all and (max-width: 1080px) {
+  .side-bar {
+      max-width: 100vw;
+      min-height: 80px;
+  }
+
+  nav div {
+    display: flex;
+    flex-direction: column;
+    border-width: 50px;
+    border-color: red;
+  }
+  
+  .navbar-nav {
+    display: flex;
+    flex-direction: row;
+  }
+
+  main {
+    font-size: 12px;
+  }
+
+  td {
+    flex-wrap: wrap;
+    display: inline-flexbox;
+    flex-direction: row;
+  }
 }

@@ -20,13 +20,14 @@ export default function NewReservation() {
 
   // Once submitted, create the reservation and return to the dashboard on that reservation's date. Otherwise show an error.
   async function submitAction() {
-    await createReservation(formData);
+    const abortController = new AbortController();
+    await createReservation(formData, abortController.signal);
   }
 
   // JSX, Page Contents
   return (
     <main>
-      <h1>New Reservation</h1>
+      <h2>New Reservation</h2>
       <ReservationForm formData={formData} submitAction={submitAction} setFormData={setFormData} setError={setError} />
       <ErrorAlert error={error} />
     </main>
