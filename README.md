@@ -1,6 +1,6 @@
 # Thinkful Final Capstone: Restaurant Reservation System
 
-## [Live Heroku App](https://dl-restres-frontend.herokuapp.com/dashboard)
+## [Live Vercel App](https://dl-restres-frontend.vercel.app/)
 
 
 ## [GitHub Project Kanban Board](https://github.com/donovanlaws/restaurant-reservation-system/projects/1)
